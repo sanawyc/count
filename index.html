@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>★ COUNT ☆ y2k counter</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <div class="stars-bg">
+    <span class="star">✦</span><span class="star">✧</span><span class="star">★</span>
+    <span class="star">☆</span><span class="star">✦</span><span class="star">✧</span>
+    <span class="star">★</span><span class="star">☆</span><span class="star">✦</span>
+    <span class="star">✧</span><span class="star">★</span><span class="star">☆</span>
+    <span class="star">✦</span><span class="star">✧</span><span class="star">★</span>
+  </div>
+
+  <main class="container">
+    <header class="title-bar">
+      <div class="title-left">
+        <span class="dot dot-pink"></span>
+        <span class="dot dot-blue"></span>
+        <span class="dot dot-yellow"></span>
+      </div>
+      <h1 class="title-text">♡ COUNT ♡ ~ y2k edition ~ ♡</h1>
+      <div class="title-right">
+        <span class="blink">_</span>
+      </div>
+    </header>
+
+    <section class="counter-card">
+      <div class="counter-display">
+        <div class="counter-label">★ CURRENT COUNT ★</div>
+        <div class="counter-number" id="counter">0</div>
+      </div>
+
+      <div class="plus-display">
+        <span id="plusSign">+</span><span id="plusValue">1</span>
+      </div>
+
+      <button id="addBtn" class="add-btn">
+        <span class="btn-main">CLICK ME ♥</span>
+        <span class="btn-sub">(or press SPACE)</span>
+      </button>
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="step">+ step:</label>
+          <select id="step">
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="5">+5</option>
+            <option value="10">+10</option>
+            <option value="50">+50</option>
+            <option value="100">+100</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="init">set to:</label>
+          <input type="number" id="init" placeholder="0" />
+          <button id="setBtn" class="mini-btn">SET</button>
+        </div>
+
+        <button id="minusBtn" class="mini-btn">− MINUS</button>
+        <button id="resetBtn" class="mini-btn danger">✖ RESET ALL</button>
+      </div>
+
+      <div class="hint">
+        <span class="hint-key">SPACE</span> = count up ·
+        <span class="hint-key">BACKSPACE</span> = count down ·
+        <span class="hint-key">R</span> = reset
+      </div>
+    </section>
+
+    <section class="history-card">
+      <h2 class="history-title">✦ history log ✦</h2>
+      <div class="history-list" id="history">
+        <div class="history-empty">~ no records yet ~</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>✧ made with love in y2k vibes ✧ <span id="totalClicks">0</span> clicks total ✧</p>
+    </footer>
+  </main>
+
+  <div class="floating-bubble b1">♥</div>
+  <div class="floating-bubble b2">★</div>
+  <div class="floating-bubble b3">♡</div>
+  <div class="floating-bubble b4">✦</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
