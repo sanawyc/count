@@ -19,8 +19,11 @@
     addBtn: document.getElementById('addBtn'),
     stepChips: document.getElementById('stepChips'),
     customStep: document.getElementById('customStep'),
-    init: document.getElementById('init'),
     setBtn: document.getElementById('setBtn'),
+    setModal: document.getElementById('setModal'),
+    setInput: document.getElementById('setInput'),
+    setConfirm: document.getElementById('setConfirm'),
+    setCancel: document.getElementById('setCancel'),
     minusBtn: document.getElementById('minusBtn'),
     resetBtn: document.getElementById('resetBtn'),
     history: document.getElementById('history'),
@@ -223,20 +226,46 @@
     }
   });
 
-  el.setBtn.addEventListener('click', function () {
-    const v = parseInt(el.init.value, 10);
+  // ---- SET TO modal ----
+  function openSetModal() {
+    el.setInput.value = '';
+    el.setModal.classList.add('open');
+    el.setModal.setAttribute('aria-hidden', 'false');
+    setTimeout(function () { el.setInput.focus(); }, 0);
+  }
+
+  function closeSetModal() {
+    el.setModal.classList.remove('open');
+    el.setModal.setAttribute('aria-hidden', 'true');
+  }
+
+  function confirmSetModal() {
+    const v = parseInt(el.setInput.value, 10);
     if (isNaN(v)) {
-      el.init.focus();
+      el.setInput.focus();
       return;
     }
     setValue(v);
-    el.init.value = '';
+    closeSetModal();
+  }
+
+  el.setBtn.addEventListener('click', openSetModal);
+  el.setCancel.addEventListener('click', closeSetModal);
+  el.setConfirm.addEventListener('click', confirmSetModal);
+
+  // clicking the overlay (outside the card) closes it
+  el.setModal.addEventListener('click', function (e) {
+    if (e.target === el.setModal) closeSetModal();
   });
 
-  el.init.addEventListener('keydown', function (e) {
+  // Enter / Esc inside the modal input
+  el.setInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      el.setBtn.click();
+      confirmSetModal();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeSetModal();
     }
   });
 
@@ -244,6 +273,16 @@
 
   // keyboard shortcuts
   document.addEventListener('keydown', function (e) {
+    // modal is open: only Esc closes it; other shortcuts blocked
+    const modalOpen = el.setModal.classList.contains('open');
+    if (modalOpen) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeSetModal();
+      }
+      return;
+    }
+
     // avoid hijacking when user is typing in input/select
     const tag = (document.activeElement && document.activeElement.tagName) || '';
     const inField = tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';

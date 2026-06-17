@@ -63,12 +63,7 @@
       </div>
 
       <div class="controls">
-        <div class="control-group">
-          <label for="init">set to:</label>
-          <input type="number" id="init" placeholder="0" />
-          <button id="setBtn" class="mini-btn">SET</button>
-        </div>
-
+        <button id="setBtn" class="mini-btn">✎ SET TO</button>
         <button id="minusBtn" class="mini-btn">− MINUS</button>
         <button id="resetBtn" class="mini-btn danger">✖ RESET ALL</button>
       </div>
@@ -96,6 +91,19 @@
   <div class="floating-bubble b2">★</div>
   <div class="floating-bubble b3">♡</div>
   <div class="floating-bubble b4">✦</div>
+
+  <div class="modal-overlay" id="setModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-label="set counter to a value">
+      <div class="modal-title">✎ SET COUNTER TO ✎</div>
+      <div class="modal-body">
+        <input type="number" id="setInput" placeholder="any #" />
+      </div>
+      <div class="modal-actions">
+        <button class="mini-btn" id="setCancel">cancel</button>
+        <button class="mini-btn" id="setConfirm">GO ♥</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
