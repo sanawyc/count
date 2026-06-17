@@ -300,6 +300,109 @@ body::before {
   box-shadow: 2px 2px 0 var(--ink);
 }
 
+/* =================== STEP BAR =================== */
+.step-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #ffffff, #fff4f8);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+
+.step-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+  padding-right: 4px;
+}
+
+.step-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1 1 auto;
+}
+
+.chip {
+  background: white;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease;
+  line-height: 1;
+}
+
+.chip:hover {
+  background: var(--yellow);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.chip:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.chip.active {
+  background: var(--neon-pink);
+  color: white;
+  text-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: translate(0, 0);
+}
+
+.step-custom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 2px dashed var(--ink);
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.step-custom label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+}
+
+.step-custom input[type="number"] {
+  width: 80px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  background: var(--cyan);
+  color: var(--ink);
+  outline: none;
+  text-align: center;
+}
+
+.step-custom input[type="number"]:focus {
+  background: var(--yellow);
+  box-shadow: 0 0 0 3px var(--pink-soft);
+}
+
+.step-custom input[type="number"]::-webkit-outer-spin-button,
+.step-custom input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
 /* =================== CONTROLS =================== */
 .controls {
   display: grid;

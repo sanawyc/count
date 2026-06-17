@@ -10,12 +10,15 @@
 
   const STORAGE_KEY = 'y2k_counter_state_v1';
 
+  const PRESET_STEPS = [1, 2, 5, 10, 50, 100];
+
   const el = {
     counter: document.getElementById('counter'),
     plusSign: document.getElementById('plusSign'),
     plusValue: document.getElementById('plusValue'),
     addBtn: document.getElementById('addBtn'),
-    step: document.getElementById('step'),
+    stepChips: document.getElementById('stepChips'),
+    customStep: document.getElementById('customStep'),
     init: document.getElementById('init'),
     setBtn: document.getElementById('setBtn'),
     minusBtn: document.getElementById('minusBtn'),
@@ -59,8 +62,26 @@
   function render() {
     el.counter.textContent = String(state.count);
     el.plusValue.textContent = String(state.step);
-    el.step.value = String(state.step);
     el.totalClicks.textContent = String(state.totalClicks);
+
+    // chip highlight
+    const chips = el.stepChips.querySelectorAll('.chip');
+    const isPreset = PRESET_STEPS.indexOf(state.step) !== -1;
+    chips.forEach(function (chip) {
+      if (parseInt(chip.dataset.step, 10) === state.step) {
+        chip.classList.add('active');
+      } else {
+        chip.classList.remove('active');
+      }
+    });
+
+    // custom input: sync only if step not a preset to avoid flickering
+    if (!isPreset) {
+      el.customStep.value = String(state.step);
+    } else if (document.activeElement !== el.customStep) {
+      el.customStep.value = '';
+    }
+
     renderHistory();
   }
 
@@ -172,10 +193,34 @@
     add(-state.step);
   });
 
-  el.step.addEventListener('change', function () {
-    state.step = Math.max(1, parseInt(el.step.value, 10) || 1);
+  // ---- step chip clicks ----
+  el.stepChips.addEventListener('click', function (e) {
+    const btn = e.target.closest('.chip');
+    if (!btn) return;
+    const v = parseInt(btn.dataset.step, 10);
+    if (isNaN(v)) return;
+    state.step = v;
     saveState();
     render();
+  });
+
+  // ---- custom step input ----
+  function applyCustomStep() {
+    const raw = el.customStep.value.trim();
+    if (raw === '') return;
+    const v = parseInt(raw, 10);
+    if (isNaN(v) || v === 0) return;
+    state.step = v;
+    saveState();
+    render();
+  }
+
+  el.customStep.addEventListener('change', applyCustomStep);
+  el.customStep.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      applyCustomStep();
+    }
   });
 
   el.setBtn.addEventListener('click', function () {

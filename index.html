@@ -46,20 +46,23 @@
         <span class="btn-sub">(or press SPACE)</span>
       </button>
 
-      <div class="controls">
-        <div class="control-group">
-          <label for="step">+ step:</label>
-          <select id="step">
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="5">+5</option>
-            <option value="10">+10</option>
-            <option value="50">+50</option>
-            <option value="100">+100</option>
-          </select>
+      <div class="step-bar">
+        <span class="step-label">step:</span>
+        <div class="step-chips" id="stepChips">
+          <button class="chip" data-step="1">+1</button>
+          <button class="chip" data-step="2">+2</button>
+          <button class="chip" data-step="5">+5</button>
+          <button class="chip" data-step="10">+10</button>
+          <button class="chip" data-step="50">+50</button>
+          <button class="chip" data-step="100">+100</button>
         </div>
+        <div class="step-custom">
+          <label for="customStep">custom</label>
+          <input type="number" id="customStep" placeholder="any #" />
+        </div>
+      </div>
 
+      <div class="controls">
         <div class="control-group">
           <label for="init">set to:</label>
           <input type="number" id="init" placeholder="0" />
